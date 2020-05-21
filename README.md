@@ -6,7 +6,7 @@ This workshop can be found at **TBA**
 
 - [x] ~~Write the Logger lib for Custom Logging and Metrics.~~
 - [x] ~~Implement extensible Metric method for reusability across multiple apps.~~
-- [x] ~~Add Business and ColdStart CloudWatch Custom Cetrics.~~
+- [x] ~~Add Business and ColdStart CloudWatch Custom Metrics.~~
 - [x] ~~Add X-Ray Annotations and Metadata for method calls.~~
 - [x] ~~Demonstrate how to inject X-Ray Subsegments to orchestrate method calls.~~
 - [x] ~~Enable Debug toggle on SAM Template.~~
