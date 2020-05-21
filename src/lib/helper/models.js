@@ -1,3 +1,8 @@
+/**
+ * Enum CloudWatch Metric unit.
+ * @readonly
+ * @enum {String}
+ */
 exports.MetricUnit = Object.freeze({
   Seconds: 'Seconds',
   Microseconds: 'Microseconds',
