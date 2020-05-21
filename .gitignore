@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Misc
+package-lock.json
+.DS_Store
+__pycache__
+template-export.yml
+packaged.yaml
+samconfig.toml
