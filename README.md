@@ -1,4 +1,4 @@
-# Serverless Obersability Workshop 
+# Serverless Observability Workshop 
 
 ## TO-DO:
 
