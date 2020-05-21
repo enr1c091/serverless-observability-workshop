@@ -1,6 +1,6 @@
 # Serverless Observability Workshop 
 
-## TO-DO:
+## Done:
 
 - [x] Write the Logger lib for Custom Logging and Metrics 
 - [x] Implement extensible Metric method for reusability across multiple apps
@@ -9,6 +9,9 @@
 - [x] Demonstrate how to inject X-Ray Subsegments to orchestrate method calls 
 - [x] Enable Debug toggle on SAM Template
 - [x] Create X-Ray Group for querying failed events by annotations
+
+## TO-DO:
+
 - [ ] Add Metric to capture Cold Start duration to report Avg time on CW Dashboards
 - [ ] Enable API Gateway Custom Access Logs
 - [ ] Create CloudWatch Dashboard template for import/export
