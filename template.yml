@@ -39,6 +39,9 @@ Resources:
     Properties:
       Handler: src/handlers/get-all-items.getAllItemsHandler
       Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
+      Environment:
+        Variables:
+          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
@@ -56,6 +59,9 @@ Resources:
     Properties:
       Handler: src/handlers/get-by-id.getByIdHandler
       Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
+      Environment:
+        Variables:
+          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
@@ -73,13 +79,13 @@ Resources:
     Properties:
       Handler: src/handlers/put-item.putItemHandler
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
+      Environment:
+        Variables:
+          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
         - CloudWatchPutMetricPolicy: {}
-      Environment:
-        Variables:
-          SAMPLE_TABLE: !Ref SampleTable
       Events:
         Api:
           Type: Api
