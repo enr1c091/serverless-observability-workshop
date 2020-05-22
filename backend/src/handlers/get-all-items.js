@@ -7,7 +7,6 @@ const log = logger_setup()
 
 let _cold_start = true
 
-
 exports.getAllItemsHandler = async (event, context) => {
     const subsegment = AWSXRay.getSegment().addNewSubsegment('Get All Items')
     let response
@@ -19,7 +18,7 @@ exports.getAllItemsHandler = async (event, context) => {
         }
         if (event.httpMethod !== 'GET') {
             log.error({ "operation": "get-all-items", "details": `getAllItems only accept GET method, you tried: ${event.httpMethod}` })
-            logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-all-items' })
+            await logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-all-items' })
             throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`)
         }
 
@@ -56,11 +55,11 @@ exports.getAllItemsHandler = async (event, context) => {
         }
 
         //Metrics
-        await logMetric(name = 'FailedGetAllItems', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-all-items' })
+        await putMetric(name = 'FailedGetAllItems', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-all-items' })
     } finally {
         subsegment.close()
     }
-    log.info({operation: 'get-all-items', eventPath: event.path, statusCode: response.statusCode, body:response.body})
+    log.info({ operation: 'get-all-items', eventPath: event.path, statusCode: response.statusCode, body: response.body })
     return response
 }
 

@@ -13,12 +13,12 @@ exports.getByIdHandler = async (event, context) => {
   try {
     if (_cold_start) {
       //Metrics
-      await putMetric(name = 'ColdStart', unit = MetricUnit.Count, value = 1, { service: 'item_service', function_name: context.functionName })
+      await logMetric(name = 'ColdStart', unit = MetricUnit.Count, value = 1, { service: 'item_service', function_name: context.functionName })
       _cold_start = false
     }
     if (event.httpMethod !== 'GET') {
       log.error({ "operation": "get-by-id", "details": `getById only accept GET method, you tried: ${event.httpMethod}` })
-      logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
+      await logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
       throw new Error(`getById only accept GET method, you tried: ${event.httpMethod}`)
     }
 
@@ -36,7 +36,7 @@ exports.getByIdHandler = async (event, context) => {
       body: JSON.stringify(item)
     }
     //Metrics
-    await putMetric(name = 'SuccessfullGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
+    await logMetric(name = 'SuccessfullGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
     //Tracing
     log.debug('Adding Item Retrieval annotation')
     subsegment.addAnnotation('ItemID', id)
@@ -58,7 +58,7 @@ exports.getByIdHandler = async (event, context) => {
     }
 
     //Metrics
-    await putMetric(name = 'FailedGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
+    await logMetric(name = 'FailedGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
   } finally {
     subsegment.close()
   }

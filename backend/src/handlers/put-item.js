@@ -13,12 +13,12 @@ exports.putItemHandler = async (event, context) => {
     try {
         if (_cold_start) {
             //Metrics
-            await putMetric(name = 'ColdStart', unit = MetricUnit.Count, value = 1, { service: 'item_service', function_name: context.functionName })
+            await logMetric(name = 'ColdStart', unit = MetricUnit.Count, value = 1, { service: 'item_service', function_name: context.functionName })
             _cold_start = false
         }
         if (event.httpMethod !== 'POST') {
             log.error({ "operation": "put-item", "details": `PutItem only accept GET method, you tried: ${event.httpMethod}` })
-            logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
+            await logMetric(name = 'UnsupportedHTTPMethod', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
             throw new Error(`PutItem only accept POST method, you tried: ${event.httpMethod}`)
         }
 
@@ -32,7 +32,7 @@ exports.putItemHandler = async (event, context) => {
             body: JSON.stringify(item)
         }
         //Metrics
-        await putMetric(name = 'SuccessfullPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
+        await logMetric(name = 'SuccessfullPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
         //Tracing
         log.debug('Adding Item Creation annotation')
         subsegment.addAnnotation('ItemID', JSON.parse(event.body).id)
@@ -54,7 +54,7 @@ exports.putItemHandler = async (event, context) => {
         }
 
         //Metrics
-        await putMetric(name = 'FailedPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
+        await logMetric(name = 'FailedPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
     } finally {
         subsegment.close()
     }

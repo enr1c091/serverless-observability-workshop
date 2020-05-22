@@ -16,9 +16,10 @@ const MetricUnit = require('../helper/models')
  */
 exports.logger_setup = () => {
     log.options.debug = process.env.ENABLE_DEBUG !== undefined ? process.env.ENABLE_DEBUG : false
-    log.options.dynamicMeta = function (message) {
+    log.options.dynamicMeta = message => {
         return {
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            'X-Amzn-Trace-Id': process.env._X_AMZN_TRACE_ID
         }
     }
     return log
@@ -222,7 +223,7 @@ const buildDimensions = (service, extra_dimensions) => {
  * @returns {String} Dimensions in the form of "service=my_service,dimension=value"
  */
 const buildDimensionsStatsDFormat = (service, extra_dimensions) => {
-    let dimensions = `service=${service.service}`
+    let dimensions = `service=${service}`
     if (extra_dimensions) {
         Object.keys(extra_dimensions).slice(0, 9).forEach(k => {
             dimensions = `${dimensions},${k}=${extra_dimensions[k]}`
