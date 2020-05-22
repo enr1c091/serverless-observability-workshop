@@ -15,6 +15,7 @@ Globals:
       Variables:
         APP_NAME: !Ref SampleTable
         SAMPLE_TABLE: !Ref SampleTable
+        SERVICE_NAME: item_service
         ENABLE_DEBUG: true
         # Enable usage of KeepAlive to reduce overhead of short-lived actions, like DynamoDB queries
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
@@ -22,6 +23,7 @@ Globals:
     TracingEnabled: true
 
 Resources:
+# API Gateway
   Api:
     Type: AWS::Serverless::Api
     Properties:
@@ -34,14 +36,12 @@ Resources:
           ResourcePath: '/*'
           HttpMethod: '*'
 
+# Lambda Functions
   getAllItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/get-all-items.getAllItemsHandler
       Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
-      Environment:
-        Variables:
-          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
@@ -59,9 +59,6 @@ Resources:
     Properties:
       Handler: src/handlers/get-by-id.getByIdHandler
       Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
-      Environment:
-        Variables:
-          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
@@ -79,9 +76,6 @@ Resources:
     Properties:
       Handler: src/handlers/put-item.putItemHandler
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
-      Environment:
-        Variables:
-          SERVICE_NAME: item_service
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref SampleTable
@@ -94,12 +88,35 @@ Resources:
             Path: /
             Method: POST
 
+# DynamoDB Table            
   SampleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:
         Name: id
         Type: String
+
+# CloudWatch Logs - Log Groups
+  GetByIdLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: getByIdFunction
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${getByIdFunction}
+      RetentionInDays: 7
+
+  GetAllItemsLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: getAllItemsFunction
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${getAllItemsFunction}
+      RetentionInDays: 7
+
+  PutItemLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: putItemFunction
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${putItemFunction}
+      RetentionInDays: 7
 
 Outputs:
   ApiUrl:

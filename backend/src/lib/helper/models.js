@@ -30,4 +30,4 @@ exports.MetricUnit = Object.freeze({
   GigabitsPerSecond: 'Second',
   TerabitsPerSecond: 'Second',
   CountPerSecond: 'Second'
-});
+})

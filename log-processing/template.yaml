@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Log Processing utilities stack.
+  Provides a dedicated Kinesis stream for log ingestion.
+  Subscribe new and existing Lambda function logs named `Airline` to Kinesis
+  and only log entries that have `REPORT` or `MONITORING` as strings
+  Expire ALL log entries after 14 days
+  Creates Custom Metrics for Memory Used, Size, and Estimated Cost for each function and version
+  Also creates custom metrics based on "MONITORING|<metric_value>|<metric_unit>|<metric_name>|<namespace>|<dimensions>" format
+Resources:
+  # Kinesis Stream that will receive Logs from CloudWatch Logs
+  LogProcessingStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      RetentionPeriodHours: 48
+      ShardCount: 1
+
+  # Subscribe new and existing CloudWatch Log groups to ship logs to Kinesis
+  SubscribeLogsToProcessingStream:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location:
+        ApplicationId: arn:aws:serverlessrepo:us-east-1:374852340823:applications/auto-subscribe-log-group-to-arn
+        SemanticVersion: 1.11.1
+      Parameters:
+        # The ARN of the Lambda function or Kinesis stream to subscribe a newly created CloudWatch log group to
+        DestinationArn: !Sub ${LogProcessingStream.Arn}
+        ## Disables processing of own logs
+        ExcludePrefix: "ProcessCustomMetricsAsync" # Uncomment to override default value
+        # Only subscribe to functions created for this project
+        ## Otherwise we'd override all CloudWatch Logs by subscribing to our Kinesis
+        Prefix: "/aws/lambda/monitoring" # Uncomment to override default value
+        # Only captures Custom Metrics and INFO|WARN|ERROR log events; reduces cost and unnecessary noise
+        FilterPattern:  "?INFO ?ERROR ?WARN ?REPORT ?MetricData" # "{ $._logLevel != \"debug\" || $.MetricData IS TRUE }"
+
+  ProcessLogAndMetricsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/index.handler
+      Description: Lambda function to parse logs from Kinesis Stream and either publish as CloudWatch Custom Metric or index logs on Elasticsearch.
+      Runtime: nodejs12.x
+      Timeout: 100
+      Tracing: Active
+      MemorySize: 1024
+      Environment:
+        Variables:
+          ENABLE_DEBUG: false
+          RECORD_LAMBDA_COLD_START_METRIC: true
+          RECORD_LAMBDA_COST_METRIC: true
+      Policies:
+        #- ElasticsearchHttpPostPolicy: *
+        #    DomainName: *
+        - CloudWatchPutMetricPolicy: {}
+      Events:
+        LogProcessingStream:
+          Type: Kinesis
+          Properties:
+            Stream: !Sub ${LogProcessingStream.Arn}
+            StartingPosition: LATEST
+            BatchSize: 10
+            MaximumBatchingWindowInSeconds: 10
+            Enabled: true
+
+Outputs:
+  LogProcessingStream:
+    Value: !Sub ${LogProcessingStream.Arn}
+    Description: Kinesis Stream used for log processing
