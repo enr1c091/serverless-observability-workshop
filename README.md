@@ -12,13 +12,13 @@ This workshop can be found at **TBA**
 - [x] ~~Enable Debug toggle on SAM Template.~~
 - [x] ~~Create X-Ray Group for querying failed events by annotations.~~
 - [x] ~~Better document helper classes.~~
+- [X] ~~Add Metric to capture Cold Start duration to report Avg time on CW Dashboards.~~
+- [X] ~~Create Log Subscription to asyncronously create CW Metrics.~~
 
 ## TO-DO:
 
-- [ ] Add Metric to capture Cold Start duration to report Avg time on CW Dashboards.
 - [ ] Enable API Gateway Custom Access Logs.
 - [ ] Create CloudWatch Dashboard template for import/export.
-- [ ] Create Log Subscription to asyncronously create CW Metrics.
 - [ ] Create CDK project to provision ES (Advanced Module in workshop).
 - [ ] Create Log Subscription to push logs to ES.
 - [ ] Create Kibana Visualization / Dashboards for import/export.
