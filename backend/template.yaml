@@ -28,9 +28,9 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      # AccessLogSetting:
-      #   - DestinationArn: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group/custom_log_group_name"
-      #     Format: "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] "$context.httpMethod $context.resourcePath $context.protocol" $context.status $context.responseLength $context.requestId"
+      #AccessLogSetting:
+      #  DestinationArn: !Sub ${ApiAccessLogGroup.Arn}
+      #  Format: $context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] $context.httpMethod $context.resourcePath $context.protocol $context.status $context.responseLength $context.requestId
       MethodSettings:
         - MetricsEnabled: True
           ResourcePath: '/*'
@@ -97,6 +97,13 @@ Resources:
         Type: String
 
 # CloudWatch Logs - Log Groups
+  ApiAccessLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: Api
+    Properties:
+      LogGroupName: !Sub /aws/apigateway/${Api}
+      RetentionInDays: 7
+  
   GetByIdLogGroup:
     Type: AWS::Logs::LogGroup
     DependsOn: getByIdFunction
