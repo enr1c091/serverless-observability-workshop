@@ -3,7 +3,6 @@ const AWS = AWSXRay.captureAWS(require('aws-sdk'))
 const cloudwatch = new AWS.CloudWatch()
 const log = require('lambda-log')
 const MetricUnit = require('../helper/models')
-const TRACE_ID_REGEX = /^Root=(.+);Parent=(.+);/;
 /**
  * Prepares logger class to be used across methods.
  * 
@@ -16,13 +15,14 @@ const TRACE_ID_REGEX = /^Root=(.+);Parent=(.+);/;
  */
 exports.logger_setup = () => {
     const tracingInfo = process.env._X_AMZN_TRACE_ID || '';
+    const TRACE_ID_REGEX = /^Root=(.+);Parent=(.+);/;
     const matches = tracingInfo.match(TRACE_ID_REGEX) || ['', '', ''];
-
+    
     log.options.debug = process.env.ENABLE_DEBUG !== undefined ? process.env.ENABLE_DEBUG : false
     log.options.dynamicMeta = message => {
         return {
             timestamp: new Date().toISOString(),
-            'X-Amzn-Trace-Id': process.env._X_AMZN_TRACE_ID,
+            'X-Amzn-Trace-Id': tracingInfo,
             'X-Amzn-Trace-Id-Root': matches[1],
             'X-Amzn-Trace-Id-Parent': matches[2]
         }
