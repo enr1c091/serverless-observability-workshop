@@ -14,6 +14,7 @@ This workshop can be found at **TBA**
 - [x] ~~Better document helper classes.~~
 - [X] ~~Add Metric to capture Cold Start duration to report Avg time on CW Dashboards.~~
 - [X] ~~Create Log Subscription to asyncronously create CW Metrics.~~
+- [X] ~~Properly chain method calls inside X-Ray Subsegments.~~
 
 ## TO-DO:
 
@@ -23,5 +24,4 @@ This workshop can be found at **TBA**
 - [ ] Create Log Subscription to push logs to ES.
 - [ ] Create Kibana Visualization / Dashboards for import/export.
 - [ ] Create Decorators for Tracing methods using X-Ray in a Tracing Lib.
-- [ ] Properly chain method calls inside X-Ray Subsegments.
 - [ ] Transform the Tracing/Logging Lib into a Layer for extended reusability (Maybe not needed for the workshop).
