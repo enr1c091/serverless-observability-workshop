@@ -16,7 +16,7 @@ Globals:
         APP_NAME: !Ref SampleTable
         SAMPLE_TABLE: !Ref SampleTable
         SERVICE_NAME: item_service
-        ENABLE_DEBUG: true
+        ENABLE_DEBUG: false
         # Enable usage of KeepAlive to reduce overhead of short-lived actions, like DynamoDB queries
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
   Api:
@@ -26,15 +26,22 @@ Resources:
 # API Gateway
   Api:
     Type: AWS::Serverless::Api
+    DependsOn: ApiCWLRoleArn
     Properties:
       StageName: Prod
-      #AccessLogSetting:
-      #  DestinationArn: !Sub ${ApiAccessLogGroup.Arn}
-      #  Format: $context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] $context.httpMethod $context.resourcePath $context.protocol $context.status $context.responseLength $context.requestId
+      AccessLogSetting:
+        DestinationArn: !Sub ${ApiAccessLogGroup.Arn}
+        # Full variable list at https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference
+        Format: "{ 'requestId':'$context.requestId', 'ip': '$context.identity.sourceIp', 'caller':'$context.identity.caller', 'user':'$context.identity.user','requestTime':'$context.requestTime', 'xrayTraceId':'$context.xrayTraceId', 'wafResponseCode':'$context.wafResponseCode', 'httpMethod':'$context.httpMethod','resourcePath':'$context.resourcePath', 'status':'$context.status','protocol':'$context.protocol', 'responseLength':'$context.responseLength' }"
       MethodSettings:
         - MetricsEnabled: True
           ResourcePath: '/*'
           HttpMethod: '*'
+  
+  ApiCWLRoleArn:
+    Type: AWS::ApiGateway::Account
+    Properties: 
+      CloudWatchRoleArn: !GetAtt CloudWatchRole.Arn
 
 # Lambda Functions
   getAllItemsFunction:
@@ -124,6 +131,21 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${putItemFunction}
       RetentionInDays: 7
+
+# IAM Role for 
+  CloudWatchRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+        Path: /
+        ManagedPolicyArns:
+          - 'arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs'
 
 Outputs:
   ApiUrl:

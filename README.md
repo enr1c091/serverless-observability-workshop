@@ -15,10 +15,10 @@ This workshop can be found at **TBA**
 - [X] ~~Add Metric to capture Cold Start duration to report Avg time on CW Dashboards.~~
 - [X] ~~Create Log Subscription to asyncronously create CW Metrics.~~
 - [X] ~~Properly chain method calls inside X-Ray Subsegments.~~
+- [X] ~~Enable API Gateway Custom Access Logs.~~
 
 ## TO-DO:
 
-- [ ] Enable API Gateway Custom Access Logs.
 - [ ] Create CloudWatch Dashboard template for import/export.
 - [ ] Create CDK project to provision ES (Advanced Module in workshop).
 - [ ] Create Log Subscription to push logs to ES.
