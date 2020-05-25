@@ -16,10 +16,11 @@ This workshop can be found at **TBA**
 - [X] ~~Create Log Subscription to asyncronously create CW Metrics.~~
 - [X] ~~Properly chain method calls inside X-Ray Subsegments.~~
 - [X] ~~Enable API Gateway Custom Access Logs.~~
+- [ ] Create CDK project to create CloudWatch Dashboard with Operational/Business metrics from Lambda.
 
 ## TO-DO:
 
-- [ ] Create CloudWatch Dashboard template for import/export.
+- [ ] Add Parameters for creating the CDK CW Dashboard stack.
 - [ ] Create CDK project to provision ES (Advanced Module in workshop).
 - [ ] Create Log Subscription to push logs to ES.
 - [ ] Create Kibana Visualization / Dashboards for import/export.
