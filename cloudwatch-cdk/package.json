@@ -8,7 +8,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "deploy": "npm run build && cdk deploy",
+    "deploy": "npm run build && cdk deploy -c stack_name=monitoring",
     "cdk": "cdk"
   },
   "devDependencies": {
@@ -25,6 +25,7 @@
     "@aws-cdk/aws-cloudwatch": "^1.41.0",
     "@aws-cdk/cdk": "^0.36.1",
     "@aws-cdk/core": "1.41.0",
+    "aws-sdk": "^2.683.0",
     "source-map-support": "^0.5.16"
   }
 }
