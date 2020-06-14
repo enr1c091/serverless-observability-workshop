@@ -1,6 +1,6 @@
-# AWS Serverless Observability Workshop 
+![Build](https://github.com/enr1c091/serverless-observability-workshop/workflows/Build/badge.svg)
 
-![Build](https://github.com/enr1c091/serverless-observability-workshop/workflows/Sync%20to%20AWS%20CodeCommit/badge.svg)
+# AWS Serverless Observability Workshop 
 
 This workshop can be found at **TBA**
 
