@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -25,23 +25,6 @@ jobs:
       run: |
         git config --global credential.helper '!aws codecommit credential-helper $@'
         git config --global credential.UseHttpPath true
-        cat ~/.gitconfig
         git remote add mirror $AWS_CODECOMMIT_REPO_URL
-        cat ~/.gitconfig
         git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
         
-    
-#     - name: Git Repository Sync
-#       uses: pixta-dev/repository-mirroring-action@v1
-#       with:
-#         target_repo_url: ${{ secrets.AWS_CODECOMMIT_REPO_URL }}
-#         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-#         ssh_username: ${{ secrets.SSH_PRIVATE_KEY_ID }} # <-- (for codecommit) you need to specify ssh-key-id as ssh username.
-        
-#     - name: Git Repository Sync
-#       uses: net-engine/github-repository-sync-action@v1.2.0
-#       with:
-#         # SSH private key for ssh connection to the target repository
-#         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-#         # Target git repository URL
-#         target_repo_url: ${{ secrets.AWS_CODECOMMIT_REPO_URL }}
