@@ -1,4 +1,4 @@
-on: [push, pull_request]
+on: [push, pull_request, delete]
 
 name: Sync to AWS CodeCommit
 
