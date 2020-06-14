@@ -34,4 +34,4 @@ jobs:
         # SSH private key for ssh connection to the target repository
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         # Target git repository URL
-        target_repo_url: ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/teste
+        target_repo_url: ${{ secrets.AWS_CODECOMMIT_REPO_URL }}
