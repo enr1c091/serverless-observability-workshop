@@ -1,6 +1,6 @@
 on: [push, pull_request, delete]
 
-name: Sync to AWS CodeCommit
+name: Build
 
 jobs:
   deploy:
@@ -18,6 +18,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
+
+## Syncs GitHub repo to AWS CodeCommit internal repo to trigger Hugo.io build pipeline
     - name: Configure Git Credential Helper
       id: setup-git
       env:
