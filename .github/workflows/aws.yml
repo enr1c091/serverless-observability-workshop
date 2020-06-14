@@ -1,0 +1,37 @@
+on: [push, pull_request]
+
+name: Sync to AWS CodeCommit
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+#     - name: Configure Git Credential Helper
+#       id: setup-git
+#       env:
+#         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#         ECR_REPOSITORY: my-ecr-repo
+#         IMAGE_TAG: ${{ github.sha }}
+#       run: |
+#         git config --global credential.helper '!aws codecommit credential-helper $@‘
+#         git config --global credential.UseHttpPath true
+
+    - name: Git Repository Sync
+      uses: net-engine/github-repository-sync-action@v1.2.0
+      with:
+        # SSH private key for ssh connection to the target repository
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Target git repository URL
+        target_repo_url: ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/teste
