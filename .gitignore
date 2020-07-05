@@ -111,3 +111,5 @@ __pycache__
 template-export.yml
 packaged.yaml
 samconfig.toml
+
+/workshop-content/workshop/themes
