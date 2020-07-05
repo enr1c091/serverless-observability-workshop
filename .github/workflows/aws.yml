@@ -1,4 +1,13 @@
-on: [push, pull_request, delete]
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches:
+      - master
+  delete:
+    branches:
+      - master
 
 name: Build
 
