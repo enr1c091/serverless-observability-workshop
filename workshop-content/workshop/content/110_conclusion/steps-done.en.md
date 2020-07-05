@@ -4,9 +4,13 @@ chapter: false
 weight: 61
 ---
 
-We have:
+In this workshop we have:
 
-- Structured a Node.js serverless application code following best practices.
-- Deployed an application consisting of serverless microservices using AWS SAM.
-- Created a multi-environment CI/CD Pipeline for serverless applications.
-- Deployed our Code and Pipeline as a reusable asset across an entire organization.
+- Defined operational and business metrics for our application using CloudWatch Metrics.
+- Monitored our API availability using AWS CloudWatch Synthetic Canaries.
+- Defined a logging pattern to produce logs properly across our application.
+- Centralized and analyzed our logs in CloudWatch and Elasticsearch.
+- Enabled active tracing on API Gateway and Lambda and instrumented subsegments in our code using AWS X-Ray.
+- Implemented code and service-level circuit breaker strategies in our application.
+- Troubleshooted failed DynamoDB service calls using AWS CloudWatch Contributor Insights.
+- Learned that gaining observability in serverless applications is not impossible, we just have to tweak our mindsets a little.
