@@ -1,6 +1,6 @@
 +++
 title = "Conclusion"
-weight = 60
+weight = 110
 +++
 
 {{%children%}}

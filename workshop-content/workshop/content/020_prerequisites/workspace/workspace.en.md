@@ -26,7 +26,7 @@ Cloud9 requires third-party-cookies. You can whitelist the [specific domains]( h
 {{< /tabs >}}
 
 - Select **Create environment**
-- Name it **serverless-catalog-workshop**, click Next.
+- Name it **serverless-observability-workshop**, click Next.
 - Choose **"t3.small"** for instance type, take all default values and click **Create environment**
 - When it comes up, customize the environment by closing the **welcome tab**
 and **lower work area**, and opening a new **terminal** tab in the main work area:

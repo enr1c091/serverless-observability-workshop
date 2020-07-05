@@ -1,8 +1,8 @@
 +++
-title = "Cleanup"
+title = "Partner Solutions"
 chapter = true
-weight = 70
+weight = 100
 +++
 
-# Cleanup
+# Partner Solutions
 ![Cleaned Environment](/images/cleanup.svg)

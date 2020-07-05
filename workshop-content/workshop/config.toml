@@ -3,7 +3,7 @@ CanonifyURLs=true
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
-title = "AWS Serverless Catalog Workshop"
+title = "AWS Serverless Observability Workshop"
 theme = "learn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
@@ -14,8 +14,8 @@ sectionPagesMenu = "main"
 enableEmoji = true
 
 [params]
-  editURL = "https://github.com/enr1c091/serverless-catalog-workshop-source/edit/master/content/"
-  description = "AWS Serverless Catalog Workshop"
+  editURL = "https://github.com/enr1c091/serverless-observability-workshop/edit/master/workshop-content/workshop/content/"
+  description = "AWS Serverless Observability Workshop"
   author = "Enrico Bergamo"
   disableBreadcrumb = false
   disableNextPrev = false
@@ -39,17 +39,17 @@ hrefTargetBlank = true
 
 #[Languages]
 #[Languages.en]
-#title = "AWS Serverless Catalog Workshop"
+#title = "AWS Serverless Observability Workshop"
 #weight = 1
 #languageName = "English"
 
 #[Languages.es]
-#title = "AWS Serverless Catalog Workshop"
+#title = "AWS Serverless Observability Workshop"
 #weight = 2
 #languageName = "Español"
 
 #[Languages.pt]
-#title = "AWS Serverless Catalog Workshop"
+#title = "AWS Serverless Observability Workshop"
 #weight = 3
 #languageName = "Português"
 
@@ -80,10 +80,10 @@ weight = 3
 
 [[menu.shortcuts]]
 name = "<i class='fab fa-github'></i> GitHub Project"
-url = "https://github.com/enr1c091/serverless-catalog-workshop"
+url = "https://github.com/enr1c091/serverless-observability-workshop"
 weight = 4
 
 [[menu.shortcuts]]
 name = "<i class='fas fa-envelope'></i> Feedback / Questions?"
-url = "mailto:serverless-catalog-workshop@amazon.com"
+url = "mailto:serverless-observability-workshop@amazon.com"
 weight = 5
