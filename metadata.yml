@@ -1,9 +1,9 @@
 #name - DNS-friendly name for the workshop. This will be used when generating the hosting URL (ie. https://my-first-workshop.workshops.aws/)
-name: application-catalog
+name: observability
 #title - The title of your workshop
-title: AWS Serverless Application Catalog Workshop
+title: AWS Serverless Observability Workshop
 #description - A short description that will be displayed in search results
-description: Creating CI/CD Pipelines for Serverless Applications! 
+description: Gaining Observability in your Serverless Applications! 
 #categories - Refer to official AWS categories covered by the workshop content here
 categories: 
   - Serverless
@@ -15,11 +15,8 @@ services:
    - Lambda
    - DynamoDB
    - CloudFormation
-   - Service Catalog
-   - CodeBuild
-   - CodeCommit
-   - CodeDeploy
-   - CodePipeline
+   - Cloud Development Kit
+   - CloudWatch
    - Serverless Application Model
    - X-Ray
 #level - Approximate skill level needed for this workshop
@@ -38,3 +35,4 @@ audience:
   - DevOps Engineer
   - SRE
   - Developer
+  - SysOps

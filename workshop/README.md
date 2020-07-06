@@ -5,18 +5,13 @@ This project allows you to scaffold a workshop using a AWS-styled Hugo theme sim
 ```bash
 .
 ├── metadata.yml                      <-- Metadata file with descriptive information about the workshop
-├── README.md                         <-- This instructions file
-├── deck                              <-- Directory for presentation deck
-├── resources                         <-- Directory for workshop resources
-│   ├── code                          <-- Directory for workshop modules code
-│   ├── policies                      <-- Directory for workshop modules IAM Roles and Policies
-│   └── templates                     <-- Directory for workshop modules CloudFormation templates
 └── workshop                          
     ├── buildspec.yml                 <-- AWS CodeBuild build script for building the workshop website
     ├── config.toml                   <-- Hugo configuration file for the workshop website
     └── content                       <-- Markdown files for pages/steps in workshop
     └── static                        <-- Any static assets to be hosted alongside the workshop (ie. images, scripts, documents, etc)
     └── themes                        <-- AWS Style Hugo Theme (Do not edit!)
+    └── README.md                     <-- This instructions file
 ```
 
 ## Requirements
