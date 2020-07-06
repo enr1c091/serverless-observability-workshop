@@ -1,13 +1,13 @@
 ---
-title: "Remove the Environment Stacks"
+title: "Delete CloudFormation Stacks"
 chapter: false
 weight: 71
 ---
 
-#### Delete the stacks for each environment created for our application
+#### Delete the stacks for our applications
 
 ```sh
-aws cloudformation delete-stack --stack-name demo-service-Dev
+aws cloudformation delete-stack --stack-name sam-app
 aws cloudformation delete-stack --stack-name demo-service-Staging
 aws cloudformation delete-stack --stack-name demo-service-Prod
 ```
