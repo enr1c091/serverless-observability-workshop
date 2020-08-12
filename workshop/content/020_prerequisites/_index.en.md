@@ -1,7 +1,7 @@
-+++
-title = "Start the workshop..."
-weight = 20
-+++
+---
+title: "Start the workshop..."
+weight: 20
+---
 
 To start the workshop, follow one of the following depending on whether you are...
 

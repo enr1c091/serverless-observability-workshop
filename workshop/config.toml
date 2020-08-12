@@ -21,7 +21,7 @@ enableEmoji = true
   disableNextPrev = false
   themeVariant = "mine"
   disableSearch = false
-  disableAssetsBusting = true
+  disableAssetsBusting = false
   disableLanguageSwitchingButton = true
   disableShortcutsTitle = false
   disableInlineCopyToClipBoard = true
@@ -32,6 +32,7 @@ enableEmoji = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
+page = [ "HTML" ]
 
 [blackfriday]
 plainIDAnchors = true

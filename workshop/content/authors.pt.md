@@ -25,8 +25,8 @@ This website is the result of many reviews and contributions.
 * **Enrico Bergamo** (PT)
 * **Luiz Yanai** (PT)
 
-##### GitHub Contributor(s) <i class='fab fa-heart'></i>
+##### GitHub Contributor(s) <i class='fas fa-heart'></i>
 
-{{% ghcontributors "https://api.github.com/repos/enr1c091/serverless-catalog-workshop-source/contributors?per_page=1000" %}}
+Please go to [Contributors page](https://github.com/enr1c091/serverless-observability-workshop/graphs/contributors) to checkout authors for this Workshop
 
-Thanks to our wonderful contributors <i class="fab fa-heart"></i>
+Thanks to our wonderful contributors <i class="fas fa-heart"></i>
