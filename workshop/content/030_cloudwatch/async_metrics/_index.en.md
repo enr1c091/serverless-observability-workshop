@@ -1,7 +1,7 @@
 ---
 title: "Pushing Metrics Asynchronously"
 chapter: true
-weight: 21
+weight: 33
 ---
 
 # Pushing Metrics Asynchronously

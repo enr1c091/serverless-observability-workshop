@@ -1,6 +1,6 @@
 +++
 title = "Analyze Helper Functions"
-weight = 11
+weight = 31
 +++
 
 To ease some of the complexity of structuring the code to push metrics to CloudWatch, you'll find a lib folder under `/serverless-observability-workshop/code/sample-app/src/lib` containing some helper functions. Let's spend some time understanding two different ways we can publish metrics to CloudWatch.
