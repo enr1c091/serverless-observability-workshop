@@ -8,7 +8,7 @@ weight: 71
 
 ```sh
 aws cloudformation delete-stack --stack-name sam-app
-aws cloudformation delete-stack --stack-name demo-service-Staging
+aws cloudformation delete-stack --stack-name log-processing
 aws cloudformation delete-stack --stack-name demo-service-Prod
 ```
 

@@ -37,7 +37,7 @@ exports.putItemHandler = async (event, context) => {
                 body: JSON.stringify(item)
             }
             //Metrics
-            await logMetric(name = 'SuccessfullPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
+            await logMetric(name = 'SuccessfulPutItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'put-item' })
             //Tracing
             log.debug('Adding Item Creation annotation')
             subsegment.addAnnotation('ItemID', JSON.parse(event.body).id)

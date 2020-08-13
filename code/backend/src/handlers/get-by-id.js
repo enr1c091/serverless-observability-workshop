@@ -38,7 +38,7 @@ exports.getByIdHandler = async (event, context) => {
         body: JSON.stringify(item)
       }
       //Metrics
-      await logMetric(name = 'SuccessfullGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
+      await logMetric(name = 'SuccessfulGetItem', unit = MetricUnit.Count, value = 1, { service: 'item_service', operation: 'get-by-id' })
       //Tracing
       log.debug('Adding Item Retrieval annotation')
       subsegment.addAnnotation('ItemID', id)
